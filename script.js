@@ -4,6 +4,7 @@ const btn = document.querySelector('.btn-country');
 const countriesContainer = document.querySelector('.countries');
 
 ///////////////////////////////////////
+// First AJAX call : XMLHttpRequest
 
 // const getCountryData = function(country) {
 // const request =  new XMLHttpRequest();
@@ -68,6 +69,7 @@ const renderCountry = function (data, className = '') {
   countriesContainer.style.opacity = 1;
 };
 
+/* 
 const getCountryDataAndNeighbour = function (country) {
   // AJAX call country 1
   const request = new XMLHttpRequest();
@@ -101,4 +103,20 @@ const getCountryDataAndNeighbour = function (country) {
   });
 };
 
-getCountryDataAndNeighbour('spain');
+getCountryDataAndNeighbour('usa');
+*/
+
+// const request =  new XMLHttpRequest();
+// request.open('GET', `https://restcountries.com/v3.1/name/${country}`);
+// request.send();
+
+const request = fetch('https://restcountries.com/v3.1/name/usa');
+console.log(request);
+
+const getCountryData = function(country) {
+  fetch(`https://restcountries.com/v3.1/name/${country}`)
+  .then(response => response.json())
+  .then(data => renderCountry(data[0]));
+};
+
+getCountryData('usa');
